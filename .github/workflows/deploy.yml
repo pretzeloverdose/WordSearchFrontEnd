@@ -3,7 +3,8 @@ name: Build and Deploy to Lightsail
 on:
   push:
     branches:
-      - main  # or your default branch
+      - master  # or your default branch
+      - develop  # add other branches as needed
 
 jobs:
   build-and-deploy:
