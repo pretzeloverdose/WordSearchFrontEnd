@@ -16,6 +16,8 @@ const SearchForm: React.FC<SearchFormProps> = () => {
   const [result, setResult] = useState<any>(null);
   const [error, setError] = useState<string>('');
 
+  const apiLocation = 'https://pretzeloverdose.com/wordsearch/api/Dictionary';
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsLoading(true);
@@ -29,7 +31,7 @@ const SearchForm: React.FC<SearchFormProps> = () => {
     };
 
     try {
-      const checkExistsResponse = await fetch('https://pretzeloverdose.com/wordsearch/api/Dictionary/Search-s3-check-exists', {
+      const checkExistsResponse = await fetch(apiLocation+'/Search-s3-check-exists', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -44,7 +46,7 @@ const SearchForm: React.FC<SearchFormProps> = () => {
       const existsData = await checkExistsResponse.json();
       setInitialMessage(existsData.exists ? "Word exists in the dictionary." : "Word does not exist in the dictionary.");
 
-      const response = await fetch('https://pretzeloverdose.com/wordsearch/api/Dictionary/search-s3', {
+      const response = await fetch(apiLocation+'/search-s3', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
