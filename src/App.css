@@ -1,16 +1,54 @@
 #root {
   max-width: 950px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1rem;
   text-align: center;
+  box-sizing: border-box;
 }
 
 .App {
   min-height: 100vh;
-  padding: 20px;
+  padding: 10px;
+  box-sizing: border-box;
+  max-width: 100%;
+  overflow-x: hidden;
 }
 
 .App h1 {
   color: #333;
   margin-bottom: 30px;
+}
+
+.App p {
+  max-width: 100%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+/* Mobile styles */
+@media (max-width: 768px) {
+  #root {
+    padding: 0.5rem;
+  }
+  
+  .App {
+    padding: 5px;
+  }
+  
+  .App p {
+    font-size: 14px;
+    line-height: 1.4;
+  }
+  
+  .App h3 {
+    font-size: 18px;
+  }
+  
+  pre {
+    font-size: 10px !important;
+    padding: 5px !important;
+    white-space: pre-wrap !important;
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+  }
 }
