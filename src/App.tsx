@@ -15,7 +15,7 @@ function App() {
       <p>Feel free to experiment with different misspelled words to see how the algorithm performs!</p>
       <h3>The Psuedocode</h3>
       <p>Here str1 is the misspelled word and str2 is a word from the dictionary. The "distance" returned represents the minimum number of single-character edits required to transform str1 into str2.</p>
-      <div style={{width: 'fit-content', margin: '0 auto', textAlign: 'left', backgroundColor: '#f4f4f4', padding: 10, borderRadius: 5}}>
+      <div style={{width: 'fit-content', margin: '0 auto', textAlign: 'left', padding: 10, borderRadius: 5}}>
       <pre style={{ textAlign: 'left', margin: 0, fontFamily: 'monospace', fontSize: '14px' }}>
 {`function levenshteinDistance(str1, str2):
   if length of str1 is 0:
