@@ -31,21 +31,7 @@ const SearchForm: React.FC<SearchFormProps> = () => {
     };
 
     try {
-      const checkExistsResponse = await fetch(apiLocation+'/Search-s3-check-exists', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(searchText),
-      });
-
-      if (!checkExistsResponse.ok) {
-        throw new Error(`HTTP error! status: ${checkExistsResponse.status}`);
-      }
-
-      const existsData = await checkExistsResponse.json();
-      setInitialMessage(existsData.exists ? "Word exists in the dictionary." : "Word does not exist in the dictionary.");
-
+      
       const response = await fetch(apiLocation+'/search-s3', {
         method: 'POST',
         headers: {
@@ -58,8 +44,22 @@ const SearchForm: React.FC<SearchFormProps> = () => {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
 
+
+
       const data = await response.json();
       setResult(data);
+      
+      // Check if searchText exists within any item.word in the results
+      const searchLower = searchText.toLowerCase();
+      const exactMatch = data.results?.some((item: any) => 
+        item.word?.toLowerCase().includes(searchLower)
+      );
+      
+      if (exactMatch) {
+        setInitialMessage(`The word "${searchText}" exists in the dictionary.`);
+      } else {
+        setInitialMessage(`The word "${searchText}" does not exist in the dictionary.`);
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'An error occurred');
     } finally {
